@@ -1,29 +1,51 @@
 <script>
 	import { Tabs, TabList, TabPanel, Tab } from './tabs.js';
-	let count = 0;
+	import { user } from "./store.js";
+	import Content from './Content.svelte';
+	import Modal from './Modal.svelte';
+	import Popup from './Popup.svelte';
+
+	const showPopup = () => {
+		open(Popup, { message: "Du vil fa en kram snart!" });
+	};
 </script>
 
 
 	<Tabs>
 		<TabList>
-			<Tab>one</Tab>
-			<Tab>two</Tab>
-			<Tab>three</Tab>
+			<Tab>Send en kram</Tab>
+			<Tab>Jeg er sundhedspersonale</Tab>
+			<Tab>Live Kram Feed</Tab>
 		</TabList>
 	
 		<TabPanel>
-			<h2>First panel</h2>
 			<main>
-				<button on:click="{() => count += 1}">SEND KRAM</button>
+				<div class="wrapper">
+					<button>SEND KRAM</button>
+				</div>
+				
 			</main>
 		</TabPanel>
 	
 		<TabPanel>
-			<h2>Second panel</h2>
+			<h1>Jeg vil gerne fa en kram</h1>
+			<form class="content">
+			<label>Navn</label>
+				<input type="text" bind:value={$user.name} />
+			<label>Telefon</label>
+				<input type="text" bind:value={$user.phone} />
+
+			<Modal>
+				<button on:click={showPopup}>Send</button>
+			</Modal>
+			</form>
+			<p>
+			{JSON.stringify($user, 0, 2)}
+			</p>
 		</TabPanel>
 	
 		<TabPanel>
-			<h2>Third panel</h2>
+			<h2>Live Kram Feed!</h2>
 		</TabPanel>
 	</Tabs>
 	
@@ -36,7 +58,15 @@
 		max-width: 240px;
 		margin: 0 auto;
 	}
+	.wrapper {
+    text-align: center;
+	display: block;
+	top: 50%;
+	margin: 0 auto;
+	}
+
 	button {
+		display: block;
 		background-color: white; 
   		border: 3px solid #555555;
 		border-radius: 8px;
@@ -44,18 +74,19 @@
   		padding: 15px 32px;
   		text-align: center;
   		text-decoration: none;
-  		display: inline-block;
-		position: absolute;
-    	top: 50%;
-  		font-size: 32px;
+  		display: inline-block;    	
+  		font-size: 24px;
 		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 	}
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+	.content {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-column-gap: 10px;
+  	}
+	
+	input {
+		width: 50%;
 	}
 
 	@media (min-width: 640px) {
