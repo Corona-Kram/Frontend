@@ -1,13 +1,7 @@
 <script>
 	import { Tabs, TabList, TabPanel, Tab } from './tabs.js';
 	import { user } from "./store.js";
-	import Content from './Content.svelte';
-	import Modal from './Modal.svelte';
-	import Popup from './Popup.svelte';
-
-	const showPopup = () => {
-		open(Popup, { message: "Du vil fa en kram snart!" });
-	};
+	
 </script>
 
 
@@ -35,9 +29,7 @@
 			<label>Telefon</label>
 				<input type="text" bind:value={$user.phone} />
 
-			<Modal>
-				<button on:click={showPopup}>Send</button>
-			</Modal>
+				<button>Send</button>
 			</form>
 			<p>
 			{JSON.stringify($user, 0, 2)}
@@ -62,19 +54,19 @@
     text-align: center;
 	display: block;
 	top: 50%;
-	margin: 0 auto;
+	right: 50%;
 	}
 
 	button {
 		display: block;
+		margin: 0 auto;
 		background-color: white; 
   		border: 3px solid #555555;
 		border-radius: 8px;
   		color: black;
   		padding: 15px 32px;
   		text-align: center;
-  		text-decoration: none;
-  		display: inline-block;    	
+  		text-decoration: none;   	
   		font-size: 24px;
 		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 	}
