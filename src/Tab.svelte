@@ -11,11 +11,16 @@
 <style>
 	button {
 		background: none;
+		cursor: pointer;
 		border: none;
 		border-bottom: 2px solid white;
 		border-radius: 0;
 		margin: 0;
-		color: #ccc;
+		color: #444;
+		flex: 1;
+	}
+	button:focus {
+		border: none;
 	}
 	
 	.selected {
